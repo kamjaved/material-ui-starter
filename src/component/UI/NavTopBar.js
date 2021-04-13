@@ -30,9 +30,6 @@ export const NavBarTop = ({ open, onDrawerOpen }) => {
                     <MenuIcon />
                 </IconButton>
 
-                <Link to="/">
-                    <Logo className={classes.logo} />
-                </Link>
 
                 <Typography className={classes.title} style={{ margin: 5 }} variant="h6" noWrap>
                     Leather-Tennary

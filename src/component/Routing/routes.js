@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import PrivateRoute from "../../utils/PrivateRoute";
 
 import DemoPage from '../Pages/Demo/DemoPage'
 import Register from '../Pages/Authorization/Register'
@@ -10,7 +11,7 @@ const Routes = () => {
         <React.Fragment>
 
             <Switch>
-                <Route exact path="/users" component={DemoPage} />
+                <PrivateRoute exact path="/users" component={DemoPage} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
 

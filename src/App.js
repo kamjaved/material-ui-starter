@@ -1,42 +1,30 @@
-// import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React, { useEffect } from "react";
 
-// import FileRoutes from './component/Routing/routes';
-// import { useStyles } from "./component/style/style";
-
-// import DashboardSidebar from './component/UI/DashboardSidebar';
-// import React from "react";
-
-// const App = () => {
-
-//   return (
-//     <Router>
-//       <React.Fragment>
-
-//         <Switch>
-
-//             <Route component={FileRoutes} />
-//         </Switch>
+import { Provider } from "react-redux";
+import store from "./store";
+import { loadUser } from "./_actions/authAction";
+import setAuthToken from "./utils/setAuthToken";
 
 
-//       </React.Fragment>
-
-//     </Router>
-//   );
-// };
-
-// export default App;
-
-
-
-import React from "react";
 import EmbedSideNav from './component/UI/EmbedSideNav'
+
+
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
+
+
+
 const App = () => {
-
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
   return (
-    <React.Fragment>
-      <EmbedSideNav />
-    </React.Fragment>
-
+    <Provider store={store}>
+      <React.Fragment>
+        <EmbedSideNav />
+      </React.Fragment>
+    </Provider>
   );
 };
 

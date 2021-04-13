@@ -4,6 +4,10 @@ import MailIcon from "@material-ui/icons/Mail";
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import { Link } from 'react-router-dom'
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { logout } from '../../_actions/authAction'
+
 
 const useStyles = makeStyles((theme) => ({
     link: {
@@ -12,21 +16,15 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const MenuSettings = ({ onDrawerClose }) => {
+const MenuSettings = ({ onDrawerClose, auth: { username, isAuthenticated, loading, role, user },
+    logout }) => {
     const classes = useStyles();
 
 
-    return (
-        <List>
-            <Link to="/user" className={classes.link}>
-                <ListItem button onClick={onDrawerClose}>
-                    <ListItemIcon  >
-                        <MailIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Users" />
-                </ListItem>
-            </Link>
 
+    const PublicLink = (
+
+        <List>
 
             <Link to="/register" className={classes.link}>
                 <ListItem button onClick={onDrawerClose}>
@@ -48,5 +46,52 @@ const MenuSettings = ({ onDrawerClose }) => {
 
         </List>
     );
+
+    const PrivateLink = (
+
+        <List>
+
+            <Link to="/users" className={classes.link}>
+                <ListItem button onClick={onDrawerClose}>
+                    <ListItemIcon>
+                        <MailIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Users" />
+                </ListItem>
+            </Link>
+
+            <Link to="/login" className={classes.link}>
+                <ListItem button onClick={logout}>
+                    <ListItemIcon>
+                        <LockOpenIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Logout" />
+                </ListItem>
+            </Link>
+        </List>
+    )
+
+
+
+
+
+    return (
+        <React.Fragment>
+            {isAuthenticated ? PrivateLink : PublicLink}
+        </React.Fragment>
+
+    );
 }
-export default MenuSettings
+
+
+
+MenuSettings.propTypes = {
+    logout: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+    auth: state.auth
+});
+
+export default connect(mapStateToProps, { logout })(MenuSettings);
