@@ -1,6 +1,7 @@
 import React from "react";
 import { ListItem, ListItemIcon, ListItemText, List, makeStyles } from "@material-ui/core/";
-import MailIcon from "@material-ui/icons/Mail";
+import SupervisedUserCircleIcon from '@material-ui/icons/SupervisedUserCircle';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import { Link } from 'react-router-dom'
@@ -51,14 +52,24 @@ const MenuSettings = ({ onDrawerClose, auth: { username, isAuthenticated, loadin
 
         <List>
 
-            <Link to="/users" className={classes.link}>
+            <Link to="/manufacturer" className={classes.link}>
                 <ListItem button onClick={onDrawerClose}>
                     <ListItemIcon>
-                        <MailIcon />
+                        <SupervisedUserCircleIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Users" />
+                    <ListItemText primary="Manufacturer" />
                 </ListItem>
             </Link>
+
+            <Link to="/global-price" className={classes.link}>
+                <ListItem button onClick={onDrawerClose}>
+                    <ListItemIcon>
+                        <MonetizationOnIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Add Rate" />
+                </ListItem>
+            </Link>
+
 
             <Link to="/login" className={classes.link}>
                 <ListItem button onClick={logout}>

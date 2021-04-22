@@ -9,7 +9,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import MenuSettings from "./MenuSetting";
 import { NavBarTop } from "./NavTopBar";
 import { useStyles } from "../style/style";
-import Routes from '../Routing/routes'
+import Routes from '../../Routing/routes'
 
 
 const MenuBurguer = ({ theme, onDrawerClose }) => {
@@ -66,6 +66,8 @@ export default function EmbedSideNav() {
                     <MenuSettings onDrawerClose={handleDrawerClose} />
 
                 </Drawer>
+
+
                 <Routes />
 
             </div>

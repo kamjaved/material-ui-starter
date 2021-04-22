@@ -55,7 +55,7 @@ const Login = ({ login, isAuthenticated }) => {
 
 
   if (isAuthenticated) {
-    return <Redirect to="/users" />;
+    return <Redirect to="/manufacturer" />;
   }
 
 

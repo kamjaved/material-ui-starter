@@ -1,6 +1,6 @@
 import axios from "axios";
-import makeToast from "../utils/toaster";
-import { setAlert } from "./alertAction";
+import makeToast from '../utils/toaster';
+
 import setAuthToken from "../utils/setAuthToken";
 import {
     USER_LOADED,
@@ -17,6 +17,7 @@ import {
 
 //Load User
 export const loadUser = () => async dispatch => {
+
     if (localStorage.token) {
         setAuthToken(localStorage.token);
     }
@@ -135,7 +136,7 @@ export const register = formData => async dispatch => {
             type: REGISTER_SUCCESS,
             payload: res.data
         });
-        dispatch(makeToast("User Created", "success"));
+        makeToast("success", "User Created")
         dispatch(loadUser());
     } catch (err) {
         const errors = err.response.data.error;
@@ -179,20 +180,20 @@ export const login = (email, password) => async dispatch => {
             type: LOGIN_SUCCESS,
             payload: res.data,
         });
-        setAlert("Login Success", 'success')
 
         dispatch(loadUser());
+        makeToast("success", "Logged In Succesfully")
+        window.location.reload();
+
     } catch (err) {
-        const errors = err.response.data;
-        console.log(err)
 
+        if (err) {
+            makeToast("error", "Invalid Credential or Something Went Wrong")
 
-        if (errors) {
-            dispatch(makeToast(err, "danger"));
         }
 
         dispatch({
-            type: LOGIN_FAIL
+            type: LOGIN_FAIL,
         });
     }
 };

@@ -2,20 +2,23 @@ import Swal from "sweetalert2";
 
 const Toast = Swal.mixin({
     toast: true,
-    position: "top-end",
+    position: "center",
+    background: '#eceff1',
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,
+    width: 300,
+
     onOpen: (toast) => {
         toast.addEventListener("mouseenter", Swal.stopTimer);
         toast.addEventListener("mouseleave", Swal.resumeTimer);
     },
 });
 
-const makeToast = (msg, type) => {
+const makeToast = (type, msg) => {
     Toast.fire({
         icon: type,
-        title: msg,
+        text: msg,
     });
 };
 
